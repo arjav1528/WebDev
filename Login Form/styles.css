@@ -1,0 +1,79 @@
+body{
+    background-color: #111029;
+}
+.card{
+    background-color: transparent;
+    perspective: 100vh;
+    display: block;
+    width: 30%;
+    height: 40%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 10px #5d5ab3;
+    border-radius: 15px;
+    border: 2px #ffffff;
+    border-style: double;
+    transition: transform 0.5s ease-in-out;
+    transform-origin: center;
+    transform-style: preserve-3d;
+}
+.card:hover{
+    /* transform:rotateY(10deg) rotateZ(10deg); */
+}
+h1{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: text;
+}
+#email,#password{
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    color: #ffffff;
+    text-align: center;
+    background-color: transparent;
+    display: block;
+    width: 60%;
+    height: 30px;
+    position: relative;
+    border-radius: 15px;
+    border: 1px solid #ffffff;
+    left: 50%;
+    transform: translateX(-50%);
+}
+::placeholder{
+    text-align: center;
+    color: #ffffff;
+}
+.label{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: hsl(0, 0%, 100%);
+    position: relative;
+    left: 19%;
+    
+}
+button{
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 60px;
+    background-color: #817ecf;
+    border: 1px solid #ffffff;
+    border-radius: 15px;
+    color: #000000;
+}
+button:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
