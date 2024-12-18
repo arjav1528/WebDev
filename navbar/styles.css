@@ -1,0 +1,19 @@
+body {
+    background-color: #111029;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+.nav-container{
+    margin-bottom: 40px;
+}
+h2{
+    margin-bottom: 20px;
+}
+.nav1{
+    border: 2px solid white;
+    
+    background-color: #403d96;
+    padding: 10px;
+} 
+
