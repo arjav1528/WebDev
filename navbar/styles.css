@@ -1,19 +1,72 @@
-body {
-    background-color: #111029;
-    color: white;
+*{
     margin: 0;
-    padding: 20px;
+    padding: 0;
+}
+body{
+    font-family: Arial, sans-serif;
+    /* padding: 10px; */
 }
 .nav-container{
-    margin-bottom: 40px;
-}
-h2{
-    margin-bottom: 20px;
+    border: 1px solid black;
+    padding-left: 20px;
+    padding-top: 10px;
 }
 .nav1{
-    border: 2px solid white;
-    
-    background-color: #403d96;
+    background-color: violet;
+    position: relative;
+    display: block;
+}
+.nav1 ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav1 ul li .logo{
     padding: 10px;
-} 
+}
+.nav1 ul .nav-links{
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    padding-right: 100px;
+}
+.nav1 ul .nav-links a{
+    /* display: flex; */
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    border-radius: 100px;
+    padding: 10px;
+    position:relative;
+    z-index: 1;
+}
+.nav1 ul .nav-links a::before{
+    content: "";
+    /* display: flex; */
+    background-color: black;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    transform: scaleX(0);
+    z-index: -1;
+    color: white;
+    padding: 10px;
+    transition: transform 0.3s ease-out;
+    
+}
+.nav1 ul .nav-links a:hover::before{
+    transform: scaleX(1);
+    transition: transform 0.3s;
+    color: white;
+}
+.nav1 ul .nav-links a:hover{
+    color: white;
+    transition: color 0.3s
+}
+
 
