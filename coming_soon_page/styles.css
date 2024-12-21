@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: skyblue;
+}
+.container{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    width: 500px;
+}
+.container .content{
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    box-shadow: 0px 0px 25px 0.5px rgba(0, 0, 0, 255);
+    
+
+}
+.container .content h1{
+    font-size: 50px;
+    color: black;
+    font-family: poppins;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container .content p{
+    font-size: 20px;
+    color: black;
+    font-family: poppins;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.container .content form button{
+    /* margin: px; */
+    /* padding-left: 10px; */
+    /* padding-right: 10px; */
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* color: white; */
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: poppins;
+    font-size: 20px;
+    position: relative;
+    justify-content: center;
+    /* background-color: purple; */
+    
+
+}
+.container .content form button::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    transition: 0.2s;
+    border-radius: 5px;
+    transform: scaleX(0);
+    
+}
+.container .content form button:hover::before{
+    transform: scaleX(1);
+}
+.container .content form input{
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: poppins;
+    font-size: 20px;
+    position: relative;
+    outline: none;
+    border: none;
+    border: 1px solid black;
+    border-radius: 15px;
+    color: black;
+}
+.container .content form input::placeholder{
+    color: black;
+    font-family: poppins;
+    font-size: 20px;
+}
+
