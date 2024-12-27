@@ -14,11 +14,22 @@
             background-color: yellow;
             font-weight: bold;
             color: #1a1a1a;
+            display: inline-block;
+            padding: 10px;
 
         }
         .hidden{
             display: none;
-        } 
+        }
+        
+        .animation{
+            border-radius: 20px;
+            background-color: white;
+            display: inline-block;
+            color: black;
+            padding: 10px;
+            transition: all 0.5s ease;   
+        }
 
     </style>
 </head>
@@ -30,6 +41,17 @@
         <p id="MyParagraph">Click to change me</p>
         <button id="ChangeTextButton">Button</button>
     </section>
+
+    <section id="Example-2">
+        <h2 class="highlight">Traversing the UL</h2>
+        <ul id="citiesList" style="list-style: none;">
+            <li class="arjav">TOkyo</li>
+            <li class="random">London</li>
+            <li>Mumbai</li>
+        </ul>
+        <button id="highlight">Add City</button>
+    </section>
+        
     <script src="./script.js"></script>
 </body>
 </html>
