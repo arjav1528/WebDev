@@ -26,7 +26,40 @@ document
     let hold = document.getElementById('citiesList');
     let cities = hold.children;
     cities[0].classList.add('animation');
-    
+    for(let i=0;i<cities.length;i++){
+        console.log(cities[i].innerHTML);
+    }
+    });
 
-    
-});
+
+
+document
+    .getElementById("changeOrder")
+    .addEventListener('click',function(){
+        let coffeeType = document.getElementById("coffeeType") ;
+        // console.log(hold);
+        coffeeType.classList.add("transtime");
+        coffeeType.classList.add('animation');
+        coffeeType.textContent = "Espresso"; 
+    });
+
+
+
+
+document.getElementById("addNewItem").addEventListener('click',function(){
+    let ul = document.getElementById("myList");
+    let li = document.createElement("li");
+    li.appendChild(document.createTextNode("New City"));
+    ul.appendChild(li);
+    });
+
+
+
+
+
+document.getElementById("removeItem").addEventListener('click',function(){
+    let ul = document.getElementById("myList2");
+    let items = ul.children;
+    ul.removeChild(items[items.length-1]);
+
+    });
