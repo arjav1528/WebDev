@@ -18,12 +18,13 @@ function fetchComments() {
 async function getPostData(){
     try{
         console.log("Fetching log data....");
-        const blogData = await fetchPost().then((data) =>{
-            // console.log('Posts fetched');
-            console.log(data);
-        });
-        console.log("Fetching comments....")
-        const commentData = await fetchComments().then((data)=> {console.log(data)});
+        // const blogData = await fetchPost().then((data) =>{
+        //     // console.log('Posts fetched');
+        //     console.log(data);
+        // });
+        // console.log("Fetching comments....")
+        // const commentData = await fetchComments().then((data)=> {console.log(data)});
+        const [postData,commentData] = await Promise.all([fetchPost(),fetchComments()]);
 
 
 
