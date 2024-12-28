@@ -80,4 +80,15 @@ document. getElementById("teaList").addEventListener('click',function(event){
 
     console.log(event.target.innerHTML);
     alert("You clicked on " + event.target.innerHTML);
-})
+});
+
+
+
+document.getElementById("feedbackForm").addEventListener('submit',function(event){
+    // alert("Form Submitted");
+    event.preventDefault();
+    let feedback = document.getElementById("feedbackInput").value;
+    console.log(feedback);
+    alert("Thank you for your feedback");
+    document.getElementById("feedbackDisplay").textContent = feedback;
+});
