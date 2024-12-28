@@ -70,7 +70,7 @@ body{
 .nav3 ul{
     list-style: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 .nav3 a{
