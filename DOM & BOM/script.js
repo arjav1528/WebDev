@@ -6,6 +6,7 @@ document
         let paragraph = document.getElementById("MyParagraph");
         console.log(paragraph.innerHTML)
         paragraph.innerHTML = "Jai hind Dosto"; 
+        // alert("Teri maa ki chut");
     });
 
 
@@ -62,4 +63,21 @@ document.getElementById("removeItem").addEventListener('click',function(){
     let items = ul.children;
     ul.removeChild(items[items.length-1]);
 
-    });
+});
+
+
+
+document
+    .getElementById("alertButton")
+    .addEventListener('click',function(){
+        alert("Hello World");
+});
+
+
+
+
+document. getElementById("teaList").addEventListener('click',function(event){
+
+    console.log(event.target.innerHTML);
+    alert("You clicked on " + event.target.innerHTML);
+})
