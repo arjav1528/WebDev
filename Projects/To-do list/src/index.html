@@ -10,6 +10,7 @@
             box-shadow: 0 0 20px 0 rgba(255,255,255, 1);
         }
     </style>
+    <!-- <script src="./script.js"></script> -->
 </head>
 <body bgcolor="#000080">
     <div class="container w-2/6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl border-2 border-white custom-shadow">
@@ -17,18 +18,22 @@
             <div class="col-12">
                 <h1 class="text-center p-5 text-white text-4xl">To-Do List</h1>
                 <form action="" class="flex justify-between">
-                    <input type="text" class="form-control bg-transparent text-white rounded-[4px] m-4 ml-8 p-2   placeholder:text-white" placeholder="Enter your name">
-                    <button class="bg-white  mt-4 ml-4 mb-4 mr-10 p-1 w-36 hover:bg-purple-400 hover:transition-all hover:duration-200 hover:text-white">Submit</button>
+                    <input type="text" id="form-input" class="form-control bg-transparent text-white rounded-[4px] m-4 ml-8 p-2   placeholder:text-white" placeholder="Enter your name">
+                    <button id="addTask" type="button" class="bg-white  mt-4 ml-4 mb-4 mr-10 p-1 w-36 hover:bg-purple-400 hover:transition-all hover:duration-200 hover:text-white">Add Task</button>
                 </form>
-                <ul>
-                    <div class="flex justify-between">
-                        <li class=" text-white p-2 m-4 ml-8 rounded-[4px]">Task 1</li>
+                <br>
+                <br>
+                <ul id="CC" class="list-group">
+                    <li>
+                        <div class="flex justify-between m-3">
+                        <h1 class=" text-white p-2 m-4 ml-10 rounded-[4px]">Task 1</h1>
                         <button class="text-white  mt-4 ml-4 mb-4 mr-10 p-1 w-36 hover:bg-purple-400 hover:transition-all hover:duration-200 hover:text-white">Delete</button>
-                    </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-    <script src="./output.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
