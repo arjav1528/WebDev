@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./output.css">
+    <style>
+        .custom-shadow{
+            box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+<body bgcolor="#12122b">
+    <div class="h-16 w-10 absolute p-4">
+        <h1 class="text-8xl text-wrap text-white animate-slide-in">Caclulator Web Application</h1>
+    </div>
+
+    <div class="absolute h-3/4 w-1/4 min-w-[450px] min-h-[700px] bg-[#212654] left-1/2 -translate-x-1/2 translate-y-1/4 border-[1px] rounded-[20px] custom-shadow">
+        <form action="">
+            <input type="text" class="relative bg-transparent h-24 w-4/5 block left-[10%] mt-6 rounded-[10px] border-2 text-4xl text-white p-4 outline-none border-1px">
+        </form>
+
+        <div class="flex flex-col justify-around space-y-10 mt-10">
+
+
+            <div class="flex justify-around">
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">7</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">8</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">9</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">x</div>
+            </div>
+            <div class="flex justify-around">
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">4</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">5</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">6</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">-</div>
+            </div>
+            <div class="flex justify-around">
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">1</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">2</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">3</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">+</div>
+            </div>
+            <div class="flex justify-around">
+                <div class="bg-purple-300 h-[70px] w-[140px] text-4xl flex justify-center items-center ">0</div>
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">.</div>
+                <!-- <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">=</div> -->
+                <div class="bg-purple-300 h-[70px] w-[70px] text-4xl flex justify-center items-center ">/</div>
+            </div>
+            <div class="relative w-4/5 h-[60px] border-[1px] flex left-[10%] rounded-lg justify-center items-center text-5xl text-white">=</div>
+        </div>
+    </div>
+    
+</body>
+</html>
