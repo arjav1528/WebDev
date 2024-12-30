@@ -36,6 +36,19 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(error);
             
         }
+        
+
+ 
+        try {
+            let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
+            let response = await fetch(url);
+            let data = await response.json();
+            // console.log(data);
+            return data;
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
     function displayWeatherData(data){
         if (!temperature || !weather || !errormsg || !city) {
@@ -44,7 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         else{
             let temp = (data.main.temp - 273.15).toFixed(2);
+            let temp = (data.main.temp - 273.15).toFixed(2);
             temperature.textContent = 'Temperature : ' + temp + '°C' ;
+            weather.textContent = 'Weather : ' + data.weather[0].description.toUpperCase();
             weather.textContent = 'Weather : ' + data.weather[0].description.toUpperCase();
             city.textContent = data.name;
 
