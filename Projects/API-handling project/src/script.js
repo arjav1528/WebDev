@@ -1,34 +1,87 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const cityInput = document.getElementById('city-input');
-    const submitButton = document.getElementById('submit-button');
-    const city = document.getElementById('city');
-    const temperature = document.getElementById('temperature');
-    const weather = document.getElementById('weather');
-    const error = document.getElementById('error');
-    const APIkey = '0a27a0ccb32a8a691af34ab115dd09cc';
+    let cityInput = document.getElementById('city-input');
+    let submitButton = document.getElementById('submit-button');
+    let city = document.getElementById('city');
+    let temperature = document.getElementById('temperature');
+    let weather = document.getElementById('weather');
+    let errormsg = document.getElementById('error');
+    let APIkey = '0a27a0ccb32a8a691af34ab115dd09cc';
 
-    submitButton.addEventListener('click', function() {
+    submitButton.addEventListener('click', async function() {
         console.log(cityInput.value);
         if(cityInput.value === '') {
-            error.textContent = 'Please enter a city';
             return;
         }
         else{
-            error.textContent = '';
-            city = cityInput.value.trim();
+            try{
+                city = cityInput.value;
+                // console.log(city);
+                let data = await getWeatherData(cityInput.value);
+                console.log(data);
+                if(data.ok){
+                    displayWeatherData(data);
+                }
+                else{
+                    displayError(data);
+                }
+                
 
 
+                
+                
+
+            }catch(err){
+                displayError(err.message);
+                console.log(err);
+            }
         }
-    });
+    })
 
-    function getWeatherData(city){
+    async function getWeatherData(city){
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
+        let response = await fetch(url);
+        let data = await response.json();
+        // console.log(data);
+        return data;
+        
 
+ 
     }
 
 
     function displayWeatherData(data){
+        if (!temperature || !weather || !errormsg || !city) {
+            console.error('Required DOM elements not found');
+            return;
+        }
+        else{
+            let temp = (data.main.temp - 273.15).toFixed(2) ?? '';
+            temperature.textContent = 'Temperature : ' + temp + '°C' ;
+            weather.textContent = 'Weather : ' + data.weather[0].description;
+            city.textContent = data.name;
+
+            errormsg.textContent = '';
+            // // errormsg.textContent
+            // console.log(data.main.temp);
+            // console.log(data.weather[0].description);
+
+        }
         
+
+
     }
+
+    function displayError(data){
+        temperature.textContent = '';
+        weather.textContent = '';
+        errormsg.textContent = data.message.toUpperCase();
+        errormsg.classList.add('text-red-500');
+
+        
+
+    }
+
+
      
 
 });
