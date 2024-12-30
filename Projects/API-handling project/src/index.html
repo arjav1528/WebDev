@@ -10,22 +10,24 @@
             box-shadow: 0 0 20px 0 rgb(255, 255, 255);
         }
     </style>
+    <script src="./script.js" defer></script>
 </head>
 <body class="flex justify-center items-center h-screen bg-[rgb(12,25,85)] ">
     <div class=" relative flex h-1/3 min-h-[300px] w-1/4 min-w-[400px] mx-auto bg-[rgb(22,43,136)] p-4 rounded-lg custom-shadow">
         <div class="flex flex-col w-full ">
             <h1 class="text-2xl font-bold text-center mb-4 text-white">Weather App</h1>
             <form action="" class="flex justify-around items-center align-middle">
-                <input type="text" class="p-2 mb-2 border  border-gray-300 rounded-lg outline-none text-black" placeholder="Username">
-                <button type="submit" class=" p-4 text-white rounded-3xl hover:bg-purple-400 hover: duration-300 hover:text-white">Submit</button>
+                <input id="city-input" type="text" class="p-2 mb-2 border  border-gray-300 rounded-lg outline-none text-black" placeholder="Username">
+                <button id="submit-button" type="button" class=" p-4 text-white rounded-3xl hover:bg-purple-400 hover: duration-300 hover:text-white">Submit</button>
             </form>
-            <div class="font-black text-center mt-10 text-3xl text-white">Bhopal</div>
+            <div id="city" class="font-black text-center mt-10 text-3xl text-white"></div>
             <div class="flex justify-center items-center mt-4 text-white">
-                <div>Temperature : <span>69</span></div>
+                <div id="emperature"></div>
             </div>
             <div class="flex justify-center items-center mt-4 text-white">
-                <div>Weather : <span>Moderate rain</span></div>
+                <div id="weather"></div>
             </div>
+            <div id="error" class="text-white text-center"></div>
 
 
 
