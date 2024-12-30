@@ -18,12 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // console.log(city);
                 let data = await getWeatherData(cityInput.value);
                 console.log(data);
-                if(data.ok){
-                    displayWeatherData(data);
-                }
-                else{
-                    displayError(data);
-                }
+                data.cod === 200 ? displayWeatherData(data) : displayError(data.message);
                 
 
 
@@ -38,11 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     async function getWeatherData(city){
-        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
-        let response = await fetch(url);
-        let data = await response.json();
-        // console.log(data);
-        return data;
+        try {
+            let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}`;
+            let response = await fetch(url);
+            let data = await response.json();
+            // console.log(data);
+            return data;
+        } catch (error) {
+            console.log(error);
+            
+        }
         
 
  
@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         else{
-            let temp = (data.main.temp - 273.15).toFixed(2) ?? '';
+            let temp = (data.main.temp - 273.15).toFixed(2);
             temperature.textContent = 'Temperature : ' + temp + '°C' ;
-            weather.textContent = 'Weather : ' + data.weather[0].description;
+            weather.textContent = 'Weather : ' + data.weather[0].description.toUpperCase();
             city.textContent = data.name;
 
             errormsg.textContent = '';
@@ -71,11 +71,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
-    function displayError(data){
+    function displayError(error){
         temperature.textContent = '';
         weather.textContent = '';
-        errormsg.textContent = data.message.toUpperCase();
-        errormsg.classList.add('text-red-500');
+        errormsg.textContent = error.message.toUpperCase();
 
         
 
