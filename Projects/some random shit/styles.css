@@ -1,0 +1,107 @@
+*{
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    color: white;
+    
+    
+    
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container{
+    min-height: 400px;
+    min-width: 400px;
+    height: 50%;
+    width: 50%;
+    background-color: black;
+    /* position: absolute; */
+    /* transform: translate(50%,50%); */
+    box-shadow: 0px 0px 40px 0px blue;
+    border: 2px solid white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    /* align-items: center; */
+}
+.title{
+    font-size: 50px;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 10px;
+    text-align: center;
+    
+} .email-container{
+    margin-top: 20px;
+    /* padding: 10px; */
+
+    width: 80%;
+    align-items: start;
+    height: 20%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    transform: translateX(10%);
+}
+.email:hover{
+    transition: 0.5s;
+    box-shadow: 0px 0px 30px 0px blue;
+}
+.email-heading{
+    color: white;
+}
+.email{
+    /* position: absolute; */
+    /* transform: translateX(10%); */
+
+    
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    /* height: 100%; */
+    outline: none;
+    color: white;
+    /* font-size: 40px; */
+    /* padding: 10px; */
+    font-size: 30px;
+}
+
+.password-button{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+.submit{
+    position: relative;
+    width: 80%;
+    /* transform: translateX(10%); */
+    margin-top: 50px;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 10px;
+    
+    outline: none;
+    cursor: pointer;
+    font-size: 30px;
+    
+    
+}
+.submit:hover{
+    background-color: blue;
+    transition: 0.5s ease;
+    box-shadow: 0px 0px 40px 0px blue;
+}
+
