@@ -19,9 +19,9 @@ body{
     transform-origin: center;
     transform-style: preserve-3d;
 }
-.card:hover{
-    /* transform:rotateY(10deg) rotateZ(10deg); */
-}
+/* .card:hover{
+    transform:rotateY(10deg) rotateZ(10deg);
+} */
 h1{
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -76,4 +76,5 @@ button{
 button:hover{
     background-color: black;
     cursor: pointer;
+    transition: all 1s;
 }
