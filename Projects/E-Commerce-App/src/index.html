@@ -6,9 +6,24 @@
     <title>Document</title>
     <link rel="stylesheet" href="./output.css">
 </head>
-<body class="bg-[#111f36] absolute">
-    <div>
-        
+<body class="bg-[#111f36] h-full w-full flex justify-center">
+    <div class=" w-[25%]  min-w-[400px]  rounded-xl shadow-xl absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] border border-white]">
+        <h1 class="text-center text-white text-3xl mt-[10px]">Products List</h1>
+        <div id="products-list">
+            <!-- Products will be displayed here through JS -->
+
+        </div>
+        <h1 class="text-center text-white text-3xl mt-[10px]">Shopping Cart</h1>
+        <div id="cart-items">
+            <!-- Cart Items will be displayed here through JS -->
+             <p class="text-white text-center">Your cart is empty</p>
+        </div>
+        <div id="cart-total" class="text-white text-3xl text-center hidden">
+            <p>Total : <span id="total-price">$0.00</span></p>
+            <button id="checkout-btn">Checkout</button>
+
+        </div>
+
     </div>
     
     
