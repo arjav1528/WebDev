@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         
     });
-    // write the update cart function
     function updateCart() {
         cartList.innerHTML = "";
         cart.forEach((item) => {
@@ -44,8 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         if (cart.length === 0) {
             emptyCartMessage.style.display = "block";
+            cartTotalMessgae.style.display = "block";
         } else {
             emptyCartMessage.style.display = "none";
+            cartTotalMessgae.style.display = "none";
         }
         let totalPrice = cart.reduce((total, item) => total + item.price, 0);
         totalPriceDisplay.textContent = `$${totalPrice.toFixed(2)}`;

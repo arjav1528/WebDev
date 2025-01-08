@@ -574,6 +574,10 @@ video {
   margin: 1rem;
 }
 
+.m-5 {
+  margin: 1.25rem;
+}
+
 .mt-\[10px\] {
   margin-top: 10px;
 }
