@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./output.css">
     <script src="./script.js"></script>
     <style>
-        .addtocart{
+        .productContainer{
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -15,6 +15,15 @@
             padding: 1rem;
             background-color: rgba(74, 20, 140, 0.3);
             border-radius: 10px;
+        }
+        .cartContainer{
+            display: flex;
+            justify-content: space-between;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+
+            align-items: center;
         }
     </style>
 </head>
@@ -30,18 +39,18 @@
         </div>
         <h1 class="text-center text-white text-3xl mt-[10px]">Shopping Cart</h1>
         <div id="cart-items">
-            <div class="flex justify-between p-4 m-4 items-center">
+            <!-- <div class="flex justify-between p-4 m-4 items-center">
                 <p class="text-white text-2xl">Product 1 : <span>0.00$</span></p>
                 <button data-id="na" class="text-white border border-white p-3 rounded-xl">Remove</button>
-            </div>
+            </div> -->
 
             
              
              <p class="text-white text-center p-4" id="empty-cart">Your cart is empty</p>
         </div>
         <div id="cart-total" class="text-white text-3xl text-center m-4 hidden">
-            <p class="m-4">Total : <span id="total-price">$0.00</span></p>
-            <button id="checkout-btn" class="border border-white rounded-xl p-3 m-5 hover:text-black hover:bg-white hover:duration-[200ms] duration-200">Checkout</button>
+            <p class="m-4" id="total-price"></p>
+            <button id="checkout-btn" class="border border-white rounded-xl p-3 m-5 hover:text-black hover:bg-white hover:duration-[200ms]">Checkout</button>
         </div>
 
     </div>
