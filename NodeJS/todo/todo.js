@@ -19,7 +19,7 @@ const loadTask = () => {
         const dataBuffer = fs.readFileSync(filePath);
         const dataJSON = dataBuffer.toString();
         return JSON.parse(dataJSON);
-        // return dataBuffer;
+        // return dataJSON;
 
     }catch(e) {
         console.log(e);
