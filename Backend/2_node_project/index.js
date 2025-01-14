@@ -1,11 +1,32 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import module from 'module';
+import logger from "./logger.js";
+import morgan from "morgan";
+
+
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+const morganFormat = ":method :url :status :response-time ms";
+app.use(
+    morgan(morganFormat, {
+      stream: {
+        write: (message) => {
+          const logObject = {
+            method: message.split(" ")[0],
+            url: message.split(" ")[1],
+            status: message.split(" ")[2],
+            responseTime: message.split(" ")[3],
+          };
+          logger.info(JSON.stringify(logObject));
+        },
+      },
+    })
+  );
 
 const port = process.env.PORT || 3000;
 let tasks = [];
@@ -16,7 +37,7 @@ app.get('/', (req, res) => {
 });
 
 // Create a new task
-app.post('/tasks', (req, res) => {
+app.post('/post', (req, res) => {
     try {
         const {name, due} = req.body;
         
@@ -92,7 +113,7 @@ app.delete('/delete/:id', (req, res) => {
     }
 });
 
-app.delete
+// app.delete
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
