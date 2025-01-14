@@ -1,36 +1,33 @@
-import express from 'express';
+import express from 'express'
 
 const app = express();
-
-const port = 3000;
 app.use(express.json());
 
-
-// app.get('/', (req, res) => {
-//     res.send('Hello World');
-// });
-
-// app.get('/tea', (req, res) => {
-//     res.send('Hello Tea');
-// });
-
-
-let teaData = [];
-let nextId = 1;
+const port = 8000;
+let tasks = [];
+let nextID = 1;
 
 app.post('/post', (req, res) => {
-
-    const {name,price} = req.body;
-    const newTea = {id : nextId++, name, price};
-    teaData.push(newTea);
-    res.status(201).send(newTea);
+    const {name,due} = req.body;
+    const newTask = {
+        id : nextID,
+        name : name,
+        due : due
+    };
+    nextID++;
+    tasks.push(newTask);
+    res.send(newTask);
 });
 
+
+
 app.get('/get', (req, res) => {
-    res.send(teaData);
+
+    res.send(tasks);
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+
+    console.log(`Server is set up on port ${port}`);
     console.log(`http://localhost:${port}`);
 });
