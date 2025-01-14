@@ -28,7 +28,7 @@ app.use(
     })
   );
 
-const port = process.env.PORT || 3000;
+const port = 8000;
 let tasks = [];
 let nextID = 1;
 
