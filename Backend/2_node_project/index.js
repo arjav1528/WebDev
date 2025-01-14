@@ -63,6 +63,21 @@ app.put('/update/:id', async (req, res) => {
     }
 });
 
+//Delete A Data
+
+app.delete('/delete/:id', (req, res) => {
+    const task = tasks.find(t => t.id === parseInt(req.params.id));
+    if(!task){
+        res.send('No Task Found');
+    }
+    else{
+        tasks = tasks.filter(t => t.id !== parseInt(req.params.id));
+        res.send(tasks);
+    }
+});
+
+app.delete
+
 app.listen(port, () => {
 
     console.log(`Server is set up on port ${port}`);
