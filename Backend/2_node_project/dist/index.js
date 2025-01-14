@@ -1,8 +1,9 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import module from 'module';
-
+import express from 'express'
+//import dotenv
+import dotenv from 'dotenv'
 dotenv.config();
+//module is not defined
+import module from 'module'
 
 const app = express();
 app.use(express.json());
@@ -11,32 +12,25 @@ const port = process.env.PORT || 3000;
 let tasks = [];
 let nextID = 1;
 
+
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-// Create a new task
-app.post('/tasks', (req, res) => {
-    try {
-        const {name, due} = req.body;
-        
-        if (!name || !due) {
-            return res.status(400).json({ error: 'Name and due date are required' });
-        }
 
-        const newTask = {
-            id: nextID,
-            name,
-            due
-        };
-        
-        nextID++;
-        tasks.push(newTask);
-        res.status(201).json(newTask);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+// Create a new task
+app.post('/post', (req, res) => {
+    const {name,due} = req.body;
+    const newTask = {
+        id : nextID,
+        name : name,
+        due : due
+    };
+    nextID++;
+    tasks.push(newTask);
+    res.send(newTask);
 });
+
 
 // Get all tasks
 
@@ -95,7 +89,9 @@ app.delete('/delete/:id', (req, res) => {
 app.delete
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+
+    console.log(`Server is set up on port ${port}`);
+    console.log(`http://localhost:${port}`);
 });
 
 module.exports = app;
