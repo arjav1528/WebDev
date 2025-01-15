@@ -77,5 +77,45 @@ userSchema.pre("save", async function(next){
     next();
 });
 
+
+userSchema.methods.isPasswordCorrect = async function(password){
+    // Compare the plain-text password with the hashed password
+    return await bcrypt.compare(password, this.password);
+
+};
+
+userSchema.methods.generateAccesToken = function(){
+    // Generate a JWT access token for the user
+    JWT.sign({
+        _id : this._id,
+        email : this.email,
+        username : this.username,
+        fullName : this.fullName,
+    
+
+    },
+    process.env.JWT_SECRET,
+    {
+        expiresIn : process.env.JWT_EXPIRY
+    }
+    );
+};
+
+userSchema.methods.generateRefreshToken = function(){
+    // Generate a JWT refresh token for the user
+    JWT.sign(
+        {
+            _id : this._id,
+            email : this.email,
+            username : this.username,
+            fullName : this.fullName,
+        },
+        process.env.JWT_SECRET,
+        {
+            expiresIn : process.env.JWT_REFRESH_EXPIRY
+        }
+    );
+}
+
 // Export the model
 export default mongoose.model("User",userSchema);
