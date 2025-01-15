@@ -45,7 +45,7 @@ const userSchema = new Schema(
         ],
         password : {
             type : String,
-            required : [true,"Password is required"]
+            required : [true,]
         },
         refreshToken : {
             type : String
@@ -57,8 +57,11 @@ const userSchema = new Schema(
         updatedAt : {
             type : Date,
             default : Date.now
-
+        }
     }
 )
+
+
+
 
 export default mongoose.model("User",userSchema);
