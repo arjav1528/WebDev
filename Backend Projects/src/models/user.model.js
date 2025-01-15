@@ -110,7 +110,7 @@ userSchema.methods.generateRefreshToken = function(){
             username : this.username,
             fullName : this.fullName,
         },
-        process.env.JWT_SECRET,
+        process.env.JWT_REFRESH_SECRET,
         {
             expiresIn : process.env.JWT_REFRESH_EXPIRY
         }
