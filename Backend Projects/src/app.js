@@ -22,12 +22,14 @@ app.use(cookieParser());
 
 //Routes
 import healthCheckRouter from './routes/healthcheck.route.js';
+import userRouter from './routes/user.routes.js';
 
 
 
 
 //routes
 app.use("/api/v1/healthcheck", healthCheckRouter)
+app.use("/api/v1/user", userRouter);
 export {app};
 
 
