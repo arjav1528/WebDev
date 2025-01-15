@@ -9,6 +9,8 @@ connectDB()
     .then(() => {
         // console.log(`Mongo DB Connected`);
         console.log(`Server running on port ${PORT}`);
+        console.log(`http://localhost:${PORT}`);
+        app.listen(PORT);
         })
     .catch((e) => {
         console.log(`Mongo DB Connection error : ${e}`);
