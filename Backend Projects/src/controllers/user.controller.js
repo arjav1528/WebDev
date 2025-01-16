@@ -9,11 +9,77 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 // ...existing code...
 
-const generateAccessAndRefreshToken = (userId) => {
-    const user = await User.findById(userId);
+const generateAccessAndRefreshToken = async (userId) => {
+    try {
+        const existedUser = await User.findOne({
+            $or: [{email}, {username}]
+        })
+        if(!existedUser){
+            throw new APIError("User Not Found", 404);
+        }
+        const accessToken = user.generateAccessToken();
+        const refreshToken = user.generateRefreshToken();
+        return {accessToken, refreshToken};
+    
+        user.refreshToken = refreshToken;
+        await user.save({validatebeforeSave : false});
+        return {accessToken, refreshToken};
+    } catch (error) {
+        console.error("Token generation failed :", error.message);
+        throw new APIError("Token generation failed", 500);
+        
+    }
 
-    user.generat
 }
+
+const loginUser = asyncHandler(async (req, res) => {
+    const {email,username,password} = req.body;
+    if(!email && !username){
+        throw new APIError("Email or username is required", 400);
+    }
+    if(!password){
+        throw new APIError("Password is required", 400);
+    }
+    const existedUser = await User.findOne({
+        $or: [{email}, {username}]
+    });
+
+    if(!existedUser){
+        throw new APIError("User Not Found", 404);
+    }
+    else if(!await existedUser.isPasswordCorrect(password)){
+        throw new APIError("Invalid credentials", 401);
+    }
+    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(existedUser._id);
+
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+
+    if(!loggedInUser){
+        throw new APIError("User login failed", 500);
+    }
+    const options = {
+        httpOnly : true,
+        secure : process.env.NODE_ENV === "production",
+        
+    }
+
+    return res
+        .status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(
+            new APIResponse(
+                200,
+                {
+                    user: loggedInUser,
+                    accessToken,
+                    refreshToken
+                },
+                "User logged in successfully"
+            )
+        );
+
+});
 
 const registerUser = asyncHandler(async (req, res) => {
     // Get user data from request
@@ -61,6 +127,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Remove password and refresh token from response
     const createdUser = await User.findById(user._id).select("-password -refreshToken");
+
 
     if (!createdUser) {
         throw new APIError('User registration failed', 500);
