@@ -9,6 +9,12 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 // ...existing code...
 
+const generateAccessAndRefreshToken = (userId) => {
+    const user = await User.findById(userId);
+
+    user.generat
+}
+
 const registerUser = asyncHandler(async (req, res) => {
     // Get user data from request
     const {fullName, email, username, password} = req.body;
