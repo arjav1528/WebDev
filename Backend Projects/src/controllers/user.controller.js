@@ -11,19 +11,21 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
-        const existedUser = await User.findOne({
-            $or: [{email}, {username}]
-        })
-        if(!existedUser){
-            throw new APIError("User Not Found", 404);
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            throw new APIError("User not found", 404);
         }
-        const accessToken = user.generateAccessToken();
+
+        // Generate tokens
+        const accessToken = user.generateAccesToken();
         const refreshToken = user.generateRefreshToken();
-        return {accessToken, refreshToken};
-    
+
+        // Save refresh token
         user.refreshToken = refreshToken;
-        await user.save({validatebeforeSave : false});
-        return {accessToken, refreshToken};
+        await user.save({ validateBeforeSave: false });
+
+        return { accessToken, refreshToken };
     } catch (error) {
         console.error("Token generation failed :", error.message);
         throw new APIError("Token generation failed", 500);
@@ -45,39 +47,49 @@ const loginUser = asyncHandler(async (req, res) => {
     });
 
     if(!existedUser){
+
         throw new APIError("User Not Found", 404);
     }
-    else if(!await existedUser.isPasswordCorrect(password)){
+    const isPasswordValid = await existedUser.isPasswordCorrect(password);
+
+
+    if(!isPasswordValid){
         throw new APIError("Invalid credentials", 401);
     }
-    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(existedUser._id);
+    // console.log(existedUser.email);
 
-    const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+    try {
+        const {accessToken, refreshToken} = await generateAccessAndRefreshToken(existedUser._id);
+        // console.log('accessToken', accessToken);
+    } catch (error) {
+        throw new APIError("Token generation failed", 500);
 
-    if(!loggedInUser){
-        throw new APIError("User login failed", 500);
-    }
-    const options = {
-        httpOnly : true,
-        secure : process.env.NODE_ENV === "production",
         
     }
 
-    return res
+    try {
+        const loggedInUser = await User.findById(existedUser._id);
+        console.log(loggedInUser);
+        if(!loggedInUser){
+            console.log("User login failed Here");
+            throw new APIError("Jai Hind Dsoto", 500);
+        }
+        const options = {
+            httpOnly : true,
+            secure : process.env.NODE_ENV === "production",
+            
+        }
+    
+        return res
         .status(200)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", refreshToken, options)
-        .json(
-            new APIResponse(
-                200,
-                {
-                    user: loggedInUser,
-                    accessToken,
-                    refreshToken
-                },
-                "User logged in successfully"
-            )
-        );
+        .json(new APIResponse(200, {user : loggedInUser}, "Health Check"));
+    } catch (error) {
+        console.log("User login failed");
+        throw new APIError("User login failed", 500);
+        
+    }
+
+    
 
 });
 

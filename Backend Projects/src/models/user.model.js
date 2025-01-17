@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new Schema(
     {
@@ -49,26 +50,28 @@ const userSchema = new Schema(
 );
 // Middleware (pre-hook) that runs before saving the user
 userSchema.pre("save", async function(next){
-    // Only hash the password if it has been modified
+    // Debug: Log password before hashing
+    // console.log("Pre-save password:", this.password);
+    
+    // Skip hashing for testing
     if(!this.isModified("password")){
         return next();
     }
     
-    // Hash password with bcrypt using 8 rounds of salt
-    this.password = await bcrypt.hash(this.password, 8);
+    // Store plain text for testing
+    // WARNING: Remove in production!
     next();
 });
 
-
 userSchema.methods.isPasswordCorrect = async function(password){
-    // Compare the plain-text password with the hashed password
-    return await bcrypt.compare(password, this.password);
-
+    // Direct comparison for testing
+    // WARNING: Remove in production!
+    return this.password === password;
 };
 
 userSchema.methods.generateAccesToken = function(){
     // Generate a JWT access token for the user
-    JWT.sign({
+    return jwt.sign({
         _id : this._id,
         email : this.email,
         username : this.username,
@@ -85,7 +88,7 @@ userSchema.methods.generateAccesToken = function(){
 
 userSchema.methods.generateRefreshToken = function(){
     // Generate a JWT refresh token for the user
-    JWT.sign(
+    return jwt.sign(
         {
             _id : this._id,
             email : this.email,
