@@ -4,6 +4,7 @@ import { APIError } from '../utils/APIErrorHandler.js';
 import APIResponse from '../utils/APIResponses.js';
 import User from '../models/user.model.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
+import jwt from 'jsonwebtoken';
 
 // ...existing code...
 
@@ -82,7 +83,10 @@ const loginUser = asyncHandler(async (req, res) => {
     
         return res
         .status(200)
-        .json(new APIResponse(200, {user : loggedInUser}, "Health Check"));
+        .json(
+            new APIResponse(200, {user : loggedInUser},"Health Check"),
+            accessToken,
+            );
     } catch (error) {
         console.log("User login failed");
         throw new APIError("User login failed", 500);
@@ -149,6 +153,58 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(201).json(
         new APIResponse(201, createdUser, "User registered successfully")
     );
+});
+
+const refreshAccessToken = asyncHandler(async (req, res) => {
+
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+        throw new APIError('Refresh token is required', 400);
+    }
+
+    const user = await User.findOne({
+        refreshToken
+
+    });
+
+    if (!user) {
+        throw new APIError('Invalid refresh token', 401);
+    }
+
+    const accessToken = user.generateAccesToken();
+
+    return res.status(200).json(
+        new APIResponse(200, { accessToken },
+            'Access token refreshed successfully')
+    );
+
+
+
+});
+
+
+const logoutUser = asyncHandler(async (req, res) => {
+
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+        throw new APIError('Refresh token is required', 400);
+    }
+
+    const user = await User.findOne({
+        refreshToken
+
+    });
+
+    if (!user) {
+        throw new APIError('Invalid refresh token', 401);
+    }
+
+    user.refreshToken = null;
+
+    await user.save({ validateBeforeSave: false });
+
 });
 
 export {
