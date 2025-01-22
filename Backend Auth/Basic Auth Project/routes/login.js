@@ -1,9 +1,13 @@
-const router = require('express').Router();
+const loginRouter = require('express').Router();
 const Joi = require('joi');
 const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
 
-router.post("/login", async (req,res) => {
+
+
+const router = require('express').Router();
+
+router.post('/register', async (req, res) => {
     try {
         const error = validate(req.body);
         if(error){
@@ -34,16 +38,10 @@ router.post("/login", async (req,res) => {
             token : token
         })
 
-        
     } catch (error) {
-        console.error("Internal Server Error");
-        return res.status(500).send({
-            message : "Internal Server Error",
-            error : error
-        });
-        
+        res.status(500).send({ message: "Internal Server Error" });
     }
-})
+});
 
 const validate = (data) => {
     const schema = Joi.object({
@@ -54,3 +52,4 @@ const validate = (data) => {
 }
 
 module.exports = router;
+

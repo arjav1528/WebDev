@@ -1,0 +1,22 @@
+const express = require('express');
+const cors = require('cors');
+const loginRoute = require('./routes/login');
+const resgisterRoute = require('./routes/register');
+
+const app = express();
+const connection = require('./DB/db');
+
+connection();
+
+app.use(express.json());
+app.use(cors());
+
+app.use('/api', loginRoute);
+app.use('/api', resgisterRoute);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+module.exports = app;
