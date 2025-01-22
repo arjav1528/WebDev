@@ -2,6 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const loginRoute = require('./routes/login');
 const resgisterRoute = require('./routes/register');
+const { User } = require('../models/user');
+const bcrypt = require('bcrypt');
+const Joi = require('joi');
+const router = require('express').Router();
 
 const app = express();
 const connection = require('./DB/db');
@@ -13,6 +17,61 @@ app.use(cors());
 
 app.use('/api', loginRoute);
 app.use('/api', resgisterRoute);
+
+// Validation schema
+const validate = (data) => {
+    const schema = Joi.object({
+        firstName: Joi.string().required().label('First Name'),
+        lastName: Joi.string().required().label('Last Name'),
+        email: Joi.string().email().required().label('Email'),
+        password: Joi.string().required().label('Password')
+    });
+    return schema.validate(data);
+};
+
+router.post('/', async (req, res) => {
+    try {
+        // Validate request body
+        const { error } = validate(req.body);
+        if (error) {
+            return res.status(400).send({
+                message: error.details[0].message
+            });
+        }
+
+        // Check if user exists
+        const user = await User.findOne({ email: req.body.email });
+        if (user) {
+            return res.status(409).send({
+                message: "User already exists in the database"
+            });
+        }
+
+        // Hash password and create user
+        const salt = await bcrypt.genSalt(Number(process.env.SALT));
+        const hashPassword = await bcrypt.hash(req.body.password, salt);
+        
+        const newUser = await new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hashPassword
+        }).save();
+
+        res.status(201).send({
+            message: "User created successfully",
+            user: newUser
+        });
+        
+    } catch (error) {
+        res.status(500).send({
+            message: "Internal Server Error",
+            error: error.message
+        });
+    }
+});
+
+module.exports = router;
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
